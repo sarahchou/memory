@@ -16,8 +16,8 @@ class MemoryGame extends React.Component {
   //initialize the game - board, number of clicks,
   initGame() {
     return {
-      board: this.initCards();
-      clicks: 0;
+      board: this.initCards(),
+      clicks: 0,
       lastClicked: null;
     }
   }
@@ -50,19 +50,24 @@ class MemoryGame extends React.Component {
   }
 
   //handles clicks and checks if matched
-  handleClick(cardVal) {
-    this.state.clicks ++;
-
-
-  }
+  //TODO not sure how to handle clicks.
+  // handleClick(cardVal) {
+  //   this.state.clicks ++;
+  //   //first click
+  //   if (lastClicked == null) {
+  //     lastClicked = cardVal;
+  //   }
+  //   else { //second click
+  //     if (lastClicked == cardVal) {
+  //
+  //     }
+  //   }
+  // }
 
   //helper method for rendering a Card
   renderCard(i) {
     let card = this.state.allCards[i];
-    return (<Card value={card.value} matched={card.matched}></Card>)
-
-
-
+    return (<Card value={card.value} matched={true}></Card>)//TODO replace with card.matched
   }
 
   //render the game
@@ -107,19 +112,19 @@ class MemoryGame extends React.Component {
   //function to make Cards
   function Card(params) {
     let root = params.root;
-
+    let matched = params.matched;
 
     if (matched) {
       return (
         <div className='matchedCard'>
-          <p>"here"</p> //val of the card
+          <p id='cardValue'>{params.value}</p>
         </div>
       )
 
     }
     else {
       return (
-        <div className='card'>
+        <div className='card'> //TODO put click method here
         <p>?</p></div>
       )
 
