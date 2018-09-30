@@ -7,3 +7,29 @@
     text-align: center;
 }
 
+.card {
+  width: 60px;
+  height: 90px;
+  color: black;
+  background: gray;
+  text-align: center;
+  font-size: 25px;
+}
+
+.matchedCard {
+  width: 60px;
+  height: 90px;
+  color: black;
+  background: green;
+  text-align: center;
+  font-size: 25px;
+}
+
+#cardValue {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#clicks {
+  text-align: center;
+}
