@@ -9,39 +9,40 @@ export default function game_init(root) {
 class MemoryGame extends React.Component {
   constructor(props) {
     super(props);
-    //the state of the game is the cards and the tries
     this.state = this.initGame();
   }
 
-  //initialize the game - board, number of clicks,
+  //initialize the game
   initGame() {
-    return {
+    return (
       board: this.initCards(),
       clicks: 0,
-      lastClicked: null;
-    }
+      lastClicked: [null, null];
+    )
   }
 
   //initialize the deck of cards for the game
   initCards() {
-    let allCards = Array(16).fill(null)
-    allCards[0] = 'A'
-    allCards[1] = 'A'
-    allCards[2] = 'B'
-    allCards[3] = 'B'
-    allCards[4] = 'C'
-    allCards[5] = 'C'
-    allCards[6] = 'D'
-    allCards[7] = 'D'
-    allCards[8] = 'E'
-    allCards[9] = 'E'
-    allCards[10] = 'F'
-    allCards[11] = 'F'
-    allCards[12] = 'G'
-    allCards[13] = 'G'
-    allCards[14] = 'H'
-    allCards[15] = 'H'
-    return allCards; //TODO shuffle this later
+    let allCards = [
+      { value: "A", matched: false},
+      { value: "A", matched: false},
+      { value: "B", matched: false},
+      { value: "B", matched: false},
+      { value: "C", matched: false},
+      { value: "C", matched: false},
+      { value: "D", matched: false},
+      { value: "D", matched: false},
+      { value: "E", matched: false},
+      { value: "E", matched: false},
+      { value: "F", matched: false},
+      { value: "F", matched: false},
+      { value: "G", matched: false},
+      { value: "G", matched: false},
+      { value: "H", matched: false},
+      { value: "H", matched: false}
+    ]
+    //TODO shuffle
+    return allCards;
   }
 
   //reset the game to its initial state
@@ -50,24 +51,39 @@ class MemoryGame extends React.Component {
   }
 
   //handles clicks and checks if matched
-  //TODO not sure how to handle clicks.
-  // handleClick(cardVal) {
-  //   this.state.clicks ++;
-  //   //first click
-  //   if (lastClicked == null) {
-  //     lastClicked = cardVal;
-  //   }
-  //   else { //second click
-  //     if (lastClicked == cardVal) {
-  //
-  //     }
-  //   }
-  // }
+  handleClick(cardVal) {
+    this.state.clicks ++;
+    //first click - update value of the first clicked
+    if (lastClicked[0] == null) {
+      lastClicked[0] = cardVal;
+    }
+    else { //second click
+      if (lastClicked[1].value == cardVal) {
+        //it's a match, so change all the cards with that value in the board to matched = true
+        for (Card c : this.board.allCards) { //TODO not sure if Card c will work, or if it is key in the dict
+          if (c.value == cardVal) {
+            c.matched = true;
+          }
+        }
+        //reset the last clicked to both be null.
+        lastClicked[0] = null;
+        lastClicked[1] = null;
+      }
+      else {
+        //reset lastClicked array
+        lastClicked[0] = null;
+        lastClicked[1] = null;
+      }
+    }
+  }
 
-  //helper method for rendering a Card
-  renderCard(i) {
-    let card = this.state.allCards[i];
-    return (<Card value={card.value} matched={true}></Card>)//TODO replace with card.matched
+  //helper for rendering cards
+  renderCards(start, end) {
+    for (int i = start; i < end; i ++) {
+      card = this.state.allCards[i]
+      <Card value={card.value} matched={card.matched}/>)
+    }
+    return;
   }
 
   //render the game
@@ -76,32 +92,20 @@ class MemoryGame extends React.Component {
       <div>
         <h3>Memory Game!</h3>
         <div className="row">
-          {this.renderCard(0)}
-          {this.renderCard(1)}
-          {this.renderCard(2)}
-          {this.renderCard(3)}
+          this.renderCards(0, 4);
         </div>
         <div className="row">
-          {this.renderCard(4)}
-          {this.renderCard(5)}
-          {this.renderCard(6)}
-          {this.renderCard(7)}
+          this.renderCards(4, 8);
         </div>
         <div className="row">
-          {this.renderCard(8)}
-          {this.renderCard(9)}
-          {this.renderCard(10)}
-          {this.renderCard(11)}
+          this.renderCards(8, 12);
         </div>
         <div className="row">
-          {this.renderCard(12)}
-          {this.renderCard(13)}
-          {this.renderCard(14)}
-          {this.renderCard(15)}
+          this.renderCards(12, 16);
         </div>
         <div className="row">
           <h2 id="clicks">Total Clicks: {this.state.clicks}</h2>
-          <button id=reset onClick{() => this.resetGame()}>Reset</button>
+          <button id="button" onClick={this.resetGame}>Reset Game</button>
         </div>
       </div>
 
@@ -111,10 +115,7 @@ class MemoryGame extends React.Component {
 
   //function to make Cards
   function Card(params) {
-    let root = params.root;
-    let matched = params.matched;
-
-    if (matched) {
+    if (params.matched) {
       return (
         <div className='matchedCard'>
           <p id='cardValue'>{params.value}</p>
@@ -124,11 +125,9 @@ class MemoryGame extends React.Component {
     }
     else {
       return (
-        <div className='card'> //TODO put click method here
+        <div className='card' onClick={this.handleClick(params.value)}>
         <p>?</p></div>
       )
-
     }
-
   }
 }
