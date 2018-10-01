@@ -22,6 +22,8 @@ class MemoryGame extends React.Component {
   }
 
   //initialize the deck of cards for the game
+
+  //I read this for inspiration to creat the dict: https://medium.freecodecamp.org/how-i-built-a-react-game-with-react-dnd-and-react-flip-move-26300156a825
   initCards() {
     let allCards = [
       { value: "A", matched: false},
@@ -40,7 +42,7 @@ class MemoryGame extends React.Component {
       { value: "G", matched: false},
       { value: "H", matched: false},
       { value: "H", matched: false}
-    ]
+    ];
     //TODO shuffle
     return allCards;
   }
@@ -51,6 +53,7 @@ class MemoryGame extends React.Component {
   }
 
   //handles clicks and checks if matched
+  // I read this: https://medium.freecodecamp.org/how-to-write-your-first-react-js-component-d728d759cabc
   handleClick(cardVal) {
     this.state.clicks ++;
     //first click - update value of the first clicked
@@ -87,6 +90,8 @@ class MemoryGame extends React.Component {
   }
 
   //render the game
+
+  //used this for onClick: https://reactjs.org/docs/handling-events.html
   render() {
     return (
       <div>
@@ -95,7 +100,7 @@ class MemoryGame extends React.Component {
           this.renderCards(0, 4);
         </div>
         <div className="row">
-          this.renderCards(4, 8);
+          this.renderCards(4, 8);s
         </div>
         <div className="row">
           this.renderCards(8, 12);
@@ -114,6 +119,7 @@ class MemoryGame extends React.Component {
   }
 
   //function to make Cards
+  //onClick: https://reactjs.org/docs/handling-events.html
   function Card(params) {
     if (params.matched) {
       return (
