@@ -90,7 +90,6 @@ class MemoryGame extends React.Component {
   }
 
   //render the game
-
   //used this for onClick: https://reactjs.org/docs/handling-events.html
   render() {
     return (
@@ -110,7 +109,7 @@ class MemoryGame extends React.Component {
         </div>
         <div className="row">
           <h2 id="clicks">Total Clicks: {this.state.clicks}</h2>
-          <button id="button" onClick={this.resetGame}>Reset Game</button>
+          <button id="button" onClick={this.resetGame()}>Reset Game</button>
         </div>
       </div>
 
