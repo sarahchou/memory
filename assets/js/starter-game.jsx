@@ -23,18 +23,19 @@ class MemoryGame extends React.Component {
 
   //shuffle the Cards
   //used this: https://www.jstips.co/en/javascript/shuffle-an-array/
-  shuffle(arr) {
+  shuffle(cards) {
     var i,
         j,
         temp;
-    for (i = arr.length - 1; i > 0; i--) {
+    for (i = cards.length - 1; i > 0; i--) {
         j = Math.floor(Math.random() * (i + 1));
-        temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+        temp = cards[i];
+        cards[i] = cards[j];
+        cards[j] = temp;
     }
-    return arr;
+    return cards;
   }
+  
   //initialize the deck of cards for the game
   //I read this for inspiration to create the dict: https://medium.freecodecamp.org/how-i-built-a-react-game-with-react-dnd-and-react-flip-move-26300156a825
   initCards() {
