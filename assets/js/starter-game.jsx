@@ -61,7 +61,7 @@ class MemoryGame extends React.Component {
       lastClicked[0] = cardVal;
     }
     else { //second click
-      if (lastClicked[1].value == cardVal) {
+      if (lastClicked[0].value == lastClicked[1].value) {
         //it's a match, so change all the cards with that value in the board to matched = true
         for (Card c : this.board.allCards) { //TODO not sure if Card c will work, or if it is key in the dict
           if (c.value == cardVal) {
