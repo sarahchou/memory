@@ -35,7 +35,7 @@ class MemoryGame extends React.Component {
     }
     return cards;
   }
-  
+
   //initialize the deck of cards for the game
   //I read this for inspiration to create the dict: https://medium.freecodecamp.org/how-i-built-a-react-game-with-react-dnd-and-react-flip-move-26300156a825
   initCards() {
@@ -87,7 +87,8 @@ class MemoryGame extends React.Component {
         lastClicked[1] = null;
       }
       else {
-        //reset lastClicked array
+        //not a match, reset lastClicked array
+        //TODO set some sort of time out before flipping cards?
         lastClicked[0] = null;
         lastClicked[1] = null;
       }
