@@ -160,14 +160,14 @@ function Card(params) {
 
   if (params.matched) {
     return (
-      <div className='matchedCard any-card' onClick={() => click(params.value)}>
+      <div className='matching-card any-card' onClick={() => click(params.value)}>
         <p id='cardValue'>{params.value}</p>
       </div>
     );
   }
   else {
     return (
-      <div className='card any-card' onClick={() => click(params.value)}>
+      <div className='notmatching-card any-card' onClick={() => click(params.value)}>
         <p>?</p>
       </div>
     );
