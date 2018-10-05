@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-import deepcopy from 'deep-copy';
 
 export default function game_init(root) {
   ReactDOM.render(<MemoryGame />, root);
@@ -15,11 +14,11 @@ class MemoryGame extends React.Component {
 
   //initialize the game
   initGame() {
-    return {
+    return (
       board: this.initCards(),
       clicks: 0,
-      lastClicked: [null, null],
-    };
+      lastClicked: [null, null];
+    )
   }
 
   //shuffle the Cards
@@ -70,16 +69,7 @@ class MemoryGame extends React.Component {
   //handles clicks and checks if matched
   // I read this: https://medium.freecodecamp.org/how-to-write-your-first-react-js-component-d728d759cabc
   handleClick(cardVal) {
-    let state1 = deepcopy(this.state);
-    state1.clicks += 1;
-
-    //this.state.clicks ++;   // mutating state
-    let lastClicked = state1.lastClicked;
-
-    lastClicked[0] = lastClicked[0] || {};
-    lastClicked[1] = lastClicked[1] || {};
-    // in js, false values include: false, null, 0, "", and undefined
-
+    this.state.clicks ++;
     //first click - update value of the first clicked
     if (lastClicked[0] == null) {
       lastClicked[0] = cardVal;
@@ -87,8 +77,7 @@ class MemoryGame extends React.Component {
     else { //second click
       if (lastClicked[0].value == lastClicked[1].value) {
         //it's a match, so change all the cards with that value in the board to matched = true
-        for (let ii = 0; ii < state1.board.length; ++ii) { //TODO not sure if Card c will work, or if it is key in the dict
-          let c = state1.board[ii];
+        for (Card c : this.board.allCards) { //TODO not sure if Card c will work, or if it is key in the dict
           if (c.value == cardVal) {
             c.matched = true;
           }
@@ -104,20 +93,15 @@ class MemoryGame extends React.Component {
         lastClicked[1] = null;
       }
     }
-
-    this.setState(state1);
   }
 
   //helper for rendering cards
   renderCards(start, end) {
-    let cards = [];
-
-    for (let i = start; i < end; i ++) {
-      let card = this.state.board[i];
-      cards.push(<Card key={i} value={card.value} matched={card.matched} click={this.handleClick.bind(this)} />);
+    for (int i = start; i < end; i ++) {
+      card = this.state.allCards[i]
+      <Card value={card.value} matched={card.matched}/>)
     }
-
-    return cards;
+    return;
   }
 
   //render the game
@@ -127,47 +111,43 @@ class MemoryGame extends React.Component {
       <div>
         <h3>Memory Game!</h3>
         <div className="row">
-          { this.renderCards(0, 4) }
+          this.renderCards(0, 4);
         </div>
         <div className="row">
-          { this.renderCards(4, 8) }
+          this.renderCards(4, 8);s
         </div>
         <div className="row">
-          { this.renderCards(8, 12) }
+          this.renderCards(8, 12);
         </div>
         <div className="row">
-          { this.renderCards(12, 16) }
+          this.renderCards(12, 16);
         </div>
         <div className="row">
-          <div className="column">
-            <h2 id="clicks">
-              Total Clicks: {this.state.clicks}
-              <button id="button" onClick={() => this.resetGame()}>Reset Game</button>
-            </h2>
-          </div>
+          <h2 id="clicks">Total Clicks: {this.state.clicks}</h2>
+          <button id="button" onClick={this.resetGame()}>Reset Game</button>
         </div>
       </div>
-    );
-  }
-}
 
-//function to make Cards
-//onClick: https://reactjs.org/docs/handling-events.html
-function Card(params) {
-  let { click } = params;
+    )
 
-  if (params.matched) {
-    return (
-      <div className='matchedCard any-card'>
-        <p id='cardValue'>{params.value}</p>
-      </div>
-    );
   }
-  else {
-    return (
-      <div className='card any-card' onClick={() => click(params.value)}>
-        <p>?</p>
-      </div>
-    );
+
+  //function to make Cards
+  //onClick: https://reactjs.org/docs/handling-events.html
+  function Card(params) {
+    if (params.matched) {
+      return (
+        <div className='matchedCard'>
+          <p id='cardValue'>{params.value}</p>
+        </div>
+      )
+
+    }
+    else {
+      return (
+        <div className='card' onClick={this.handleClick(params.value)}>
+        <p>?</p></div>
+      )
+    }
   }
 }

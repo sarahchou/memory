@@ -2,20 +2,12 @@
 
 @import "~milligram/dist/milligram";
 
-.any-card {
-    text-align: center;
-    padding: 3em;
-    width: 8em;
-    height: 8em;
-    border: thin solid green;
-}
-
 .column > p {
     padding-top: 10ex;
     text-align: center;
 }
 
-#abutton {
+#button {
   width: 50px;
   height: 20px;
   color: blue;
