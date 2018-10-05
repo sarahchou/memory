@@ -89,7 +89,7 @@ class MemoryGame extends React.Component {
     else { //second click
       if (lastClicked[0].value == lastClicked[1].value) {
         //it's a match, so change all the cards with that value in the board to matched = true
-        for (let ii = 0; ii < state1.board.length; ++ii) { 
+        for (let ii = 0; ii < state1.board.length; ++ii) {
           let c = state1.board[ii];
           if (c.value == cardVal) {
             c.matched = true;
@@ -122,12 +122,13 @@ class MemoryGame extends React.Component {
     return cards;
   }
 
-  //render the game
-  //used this for onClick: https://reactjs.org/docs/handling-events.html
+  //render the game with title, all cards, reset button, and click counter
   render() {
     return (
       <div>
         <h3>Memory Game!</h3>
+        <button id="button" onClick={() => this.resetGame()}>Reset Game</button>
+
         <div className="row">
           { this.renderCards(0, 4) }
         </div>
@@ -145,7 +146,6 @@ class MemoryGame extends React.Component {
             <h2 id="clicks">
               Total Clicks: {this.state.clicks}
             </h2>
-            <button id="button" onClick={() => this.resetGame()}>Reset Game</button>
           </div>
         </div>
       </div>
@@ -160,7 +160,7 @@ function Card(params) {
 
   if (params.matched) {
     return (
-      <div className='matchedCard any-card'>
+      <div className='matchedCard any-card' onClick={() => click(params.value)}>
         <p id='cardValue'>{params.value}</p>
       </div>
     );
