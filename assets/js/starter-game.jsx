@@ -142,8 +142,8 @@ class MemoryGame extends React.Component {
           <div className="column">
             <h2 id="clicks">
               Total Clicks: {this.state.clicks}
-              <button id="button" onClick={() => this.resetGame()}>Reset Game</button>
             </h2>
+            <button id="button" onClick={() => this.resetGame()}>Reset Game</button>
           </div>
         </div>
       </div>
