@@ -2,12 +2,22 @@
 
 @import "~milligram/dist/milligram";
 
-.any-card {
+.matching-card {
     text-align: center;
     padding: 3em;
     width: 8em;
     height: 8em;
-    border: thin solid green;
+    border: thin solid black;
+    background: #00ff11;
+}
+
+.notmatching-card {
+    text-align: center;
+    padding: 3em;
+    width: 8em;
+    height: 8em;
+    border: thin solid black;
+    background: white;
 }
 
 .column > p {
@@ -15,27 +25,11 @@
     text-align: center;
 }
 
-#card {
-  width: 60px;
-  height: 90px;
-  color: black;
-  background: gray;
-  text-align: center;
-  font-size: 25px;
-}
-
-#matchedCard {
-  width: 60px;
-  height: 90px;
-  color: black;
-  background: green;
-  text-align: center;
-  font-size: 25px;
-}
-
 #cardValue {
-  font-size: 20px;
+  font-size: 40px;
   font-weight: 600;
+  text-align: center;
+  font-color: white;
 }
 
 #clicks {
