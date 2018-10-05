@@ -154,21 +154,20 @@ class MemoryGame extends React.Component {
 }
 
 //function to make Cards
-//onClick: https://reactjs.org/docs/handling-events.html
 function Card(params) {
   let { click } = params;
 
   if (params.matched) {
     return (
-      <div className='matching-card any-card' onClick={() => click(params.value)}>
+      <div className='matching-card' onClick={() => click(params.value)}>
         <p id='cardValue'>{params.value}</p>
       </div>
     );
   }
   else {
     return (
-      <div className='notmatching-card any-card' onClick={() => click(params.value)}>
-        <p>?</p>
+      <div className='notmatching-card' onClick={() => click(params.value)}>
+        <p id='cardValue'>?</p>
       </div>
     );
   }
