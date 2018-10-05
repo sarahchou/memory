@@ -3,7 +3,6 @@
 @import "~milligram/dist/milligram";
 
 .matching-card {
-    text-align: center;
     padding: 3em;
     width: 8em;
     height: 8em;
@@ -28,7 +27,6 @@
 #cardValue {
   font-size: 40px;
   font-weight: 600;
-  text-align: center;
   font-color: white;
 }
 
