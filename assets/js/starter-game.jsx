@@ -73,21 +73,23 @@ class MemoryGame extends React.Component {
     let state1 = deepcopy(this.state);
     state1.clicks += 1;
 
-    //this.state.clicks ++;   // mutating state
     let lastClicked = state1.lastClicked;
 
+    //the first val of lastClicked is either the first val or a new Object
     lastClicked[0] = lastClicked[0] || {};
+    //the second val of lastClicked is either the second val or a new Object
     lastClicked[1] = lastClicked[1] || {};
     // in js, false values include: false, null, 0, "", and undefined
 
-    //first click - update value of the first clicked
+    //first click
     if (lastClicked[0] == null) {
       lastClicked[0] = cardVal;
+      return;
     }
     else { //second click
       if (lastClicked[0].value == lastClicked[1].value) {
         //it's a match, so change all the cards with that value in the board to matched = true
-        for (let ii = 0; ii < state1.board.length; ++ii) { //TODO not sure if Card c will work, or if it is key in the dict
+        for (let ii = 0; ii < state1.board.length; ++ii) { 
           let c = state1.board[ii];
           if (c.value == cardVal) {
             c.matched = true;
